@@ -13,7 +13,7 @@
 ```shell
 git clone https://github.com/lucienmakutano/image_aug.git
 
-cd image_augh
+cd image_aug
 
 python -m venv venv
 
