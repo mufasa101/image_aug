@@ -57,6 +57,11 @@ Imagine you’re in the car business or driving around. Tires with cracks are a 
 ---
 
 ## **How Do You Run This?**
+### System requirements
+- Git
+- IDE
+- Python
+
 1. Clone the project:
    ```bash
    git clone https://github.com/lucienmakutano/image_aug.git
