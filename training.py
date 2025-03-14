@@ -1,6 +1,3 @@
-
-
-
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
 
 # Function to train the model on the original (non-augmented) dataset
@@ -66,12 +63,3 @@ def train_on_augmented(model, datagen, train_images, train_labels_encoded, test_
     loss, accuracy = model.evaluate(test_images, test_labels_encoded)
     print(f"✅ Augmented Model - Test Loss: {loss:.2f}, Test Accuracy: {accuracy:.2f}")
     return history
-
-
-
-
-# Overall Summary:
-# This code defines two separate functions that train and evaluate a Keras model.
-# One function (train_on_original) trains the model on the original dataset with a validation split, using callbacks to save the best model and stop early if the validation loss stops improving.
-# The other function (train_on_augmented) trains the model using an image augmentation generator to provide dynamically augmented training data, with similar checkpointing and early stopping. 
-# Both functions then evaluate the model on a test dataset and print the test loss and accuracy.
