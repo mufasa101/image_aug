@@ -8,6 +8,8 @@ from training import train_on_original, train_on_augmented
 from performance_analysis import (
     compare_validation_loss, compare_validation_accuracy, show_confusion_matrix, confusion_matrix
 )
+from cnn_model import create_cnn
+
 
 # Example usage (assuming you have a folder called `TireTextures`):
 _parent_folder = join(Path(__file__).parent, "data", "TireTextures")
@@ -27,3 +29,13 @@ print(f"Testing Data Shape: {_test_images.shape}")  # Number of testing images a
 # generator = training_generator(join(_parent_folder, "training_data"))
 # visualizer(_train_images, _train_labels, train_datagen)
 
+model = create_cnn((128, 128, 3), 2)  # Build the CNN
+print(model.summary()) # Show us the layers we just created
+
+original_history = train_on_original(model, _train_images, train_labels_encoded, _test_images, test_labels_encoded)
+augmented_history= train_on_augmented(model, train_datagen, _train_images, train_labels_encoded, _test_images, test_labels_encoded)
+
+# Performance analysis
+compare_validation_accuracy(original_history, augmented_history)
+compare_validation_loss(original_history, augmented_history)
+show_confusion_matrix(test_labels_encoded, predictions=None, label_encoder=label_encoder)
