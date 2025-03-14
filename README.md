@@ -61,6 +61,10 @@ Imagine you’re in the car business or driving around. Tires with cracks are a 
    ```bash
    git clone https://github.com/lucienmakutano/image_aug.git
    cd image_aug
+
+   python -m venv venv
+
+   .\venv\Scritps\activate
    
    pip install -r requirements.txt
    
