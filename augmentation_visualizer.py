@@ -1,25 +1,47 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import matplotlib.pyplot as plt
 import random
-import  numpy as np
+import numpy as np
 
+train_datagen = ImageDataGenerator(
+    rescale=1.0/255,  # Normalize pixel values
+    rotation_range=30,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True,
+    fill_mode='nearest'
+)
 
-# Function to show original and augmented images side-by-side (so we compare)
-def visualize_augmentations(images, labels):
+# No augmentation for validation data (just rescale)
+val_datagen = ImageDataGenerator(rescale=1.0/255)
 
-    # Set up the different ways to make the images look "different" (augmentation techniques)
-    generator = ImageDataGenerator(
-        rotation_range=30,  # Rotate the image by up to 30 degrees, just a little twist!
-        width_shift_range=0.2,  # Move the image left or right by 20% of its width
-        height_shift_range=0.2,  # Move the image up or down by 20% of its height
-        shear_range=0.2,  # Add a slight slant to the image
-        zoom_range=0.3,  # Zoom in or out by 30%
-        horizontal_flip=True,  # Flip the image like a mirror (left to right)
-        brightness_range=[0.8, 1.2]  # Make the image slightly brighter or darker
+def training_generator(train_dir):
+    train_generator = train_datagen.flow_from_directory(
+        train_dir,
+        target_size=(224, 224),  # Resize images
+        batch_size=32,
+        class_mode='categorical'
     )
 
+    return train_generator
+
+def validation_generator(test_dir):
+    val_generator = val_datagen.flow_from_directory(
+        test_dir,
+        target_size=(224, 224),
+        batch_size=32,
+        class_mode='categorical'
+    )
+
+    return val_generator
+
+# Function to show original and augmented images side-by-side (so we compare)
+def visualizer(images, labels, generator):
     # Pick 5 random images from the dataset
     indices = random.sample(range(len(images)), 5)
+
     for idx in indices:
         original = images[idx]  # Get the original image
         augmented = generator.flow(np.expand_dims(original, 0), batch_size=1)[0][0]  # Make an augmented version
@@ -38,28 +60,4 @@ def visualize_augmentations(images, labels):
         plt.axis("off")  # Remove the axis ticks again
 
         plt.tight_layout()  # Make sure there's no overlap in the images
-        plt.show()
-
-
-def augment_images(images, labels):
-    pass
-
-
-def random_brightness(images, labels):
-    pass
-
-
-def rotate(images, labels):
-    pass
-
-
-def horizontal_flip(images, labels):
-    pass
-
-
-def vertical_flip(images, labels):
-    pass
-
-
-def random_contrast(images, labels):
-    pass
+    plt.show()

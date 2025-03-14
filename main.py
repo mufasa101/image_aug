@@ -3,9 +3,9 @@ from pathlib import Path
 from sklearn.preprocessing import LabelEncoder
 
 from data_loader import load_images
-from augmentation_visualizer import visualize_augmentations
+from augmentation_visualizer import visualizer, train_datagen
 
-# Example usage (assuming you have a folder called `Tire Textures`):
+# Example usage (assuming you have a folder called `TireTextures`):
 _parent_folder = join(Path(__file__).parent, "data", "TireTextures")
 _train_images, _train_labels, _test_images, _test_labels = load_images(_parent_folder)
 
@@ -20,4 +20,5 @@ print(f"Training Data Shape: {_train_images.shape}")  # Number of training image
 print(f"Testing Data Shape: {_test_images.shape}")  # Number of testing images and size
 
 # Example usage (assuming your `train_images` and `train_labels` are already loaded):
-visualize_augmentations(_train_images, _train_labels)
+# generator = training_generator(join(_parent_folder, "training_data"))
+visualizer(_train_images, _train_labels, train_datagen)
