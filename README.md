@@ -77,3 +77,6 @@ Imagine you’re in the car business or driving around. Tires with cracks are a 
    ```
 
 2. Download the Tire Texture data and save it in `data` and rename the `Tire Texture` to `TireTexture`
+
+### Google Colab
+You can use [Google colab](https://colab.research.google.com/drive/1JMLnhO60PYWHFEFe6API1oiBOTf2KiRp?usp=sharing) to run the project on Servers provisioned by Google.
