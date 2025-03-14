@@ -56,7 +56,7 @@ Imagine you’re in the car business or driving around. Tires with cracks are a 
 
 ---
 
-## **How Do You Run This?**
+## **How Do You Run the project locally?**
 ### System requirements
 - Git
 - IDE
